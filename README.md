@@ -28,7 +28,7 @@ First line **MUST** be filled. If the 1st line does not contain a valid name, bu
 From the following 3 text-oriented lines, at least one must be non-empty. If all are empty, marker will not be created. Assumption here is, that the marker **needs** a description.
 
 ## Example
-Below example will create marker on your map with `portal` icon assigned.
+Below example will create marker on your map with `star` icon assigned.
 
 First, you build the sign
 
