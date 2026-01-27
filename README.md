@@ -8,7 +8,7 @@ The idea is simple - you put a sign in the game, and you can see it on your Blue
 This plugin is a fork of and old, no longer maintained solution - [BlueMapSignMarkers](https://modrinth.com/plugin/bluemapsignmarkers) - introducing some simplification and quality-of-life tweaks, as compared to the original source. 
 The goal was to make it usable in as little steps as possible, and as easy as possible for players to understand how to use it.
 
-Compatible with Paper / Folia. No other software compatibility (e.g. Fabric) is planned, as there are already similar, and good solutions for those.
+Compatible with Paper / Folia / Spigot / Purpur. No other software compatibility (e.g. Fabric) is planned, as there are already similar, and good solutions for those.
 
 ## Setup
 You need to have **BlueMap** installed on your server. The plugin depends on it.
