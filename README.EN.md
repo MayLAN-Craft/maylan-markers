@@ -1,14 +1,16 @@
 
-## Easy BlueMap Sign Markers
+## Maylan Markers
+
+[RUSSIAN README](README.MD)
 
 ![plugin_icon](Icon_EasyBMSignMarkers.png)
 
 The idea is simple - you put a sign in the game, and you can see it on your BlueMap.
 
-This plugin is a fork of and old, no longer maintained solution - [BlueMapSignMarkers](https://modrinth.com/plugin/bluemapsignmarkers) - introducing some simplification and quality-of-life tweaks, as compared to the original source. 
+This plugin is a fork of and old, no longer maintained solutions - [BlueMapSignMarkers](https://modrinth.com/plugin/bluemapsignmarkers) and [Easy BlueMap Sign Markers](https://github.com/deimiczny/easy-bmapmarkers) - introducing some simplification and quality-of-life tweaks, as compared to the original source. 
 The goal was to make it usable in as little steps as possible, and as easy as possible for players to understand how to use it.
 
-Compatible with Paper / Folia / Spigot / Purpur. No other software compatibility (e.g. Fabric) is planned, as there are already similar, and good solutions for those.
+Compatible with Paper 26.1.2+
 
 ## Setup
 You need to have **BlueMap** installed on your server. The plugin depends on it.
@@ -102,4 +104,4 @@ The images used are modified versions of original Dynmap assets. You can find th
 - [Original resources](https://github.com/webbukkit/dynmap/tree/v3.0/DynmapCore/src/main/resources/markers)
 
 ## Download
-You can download the plugin on [Modrinth](https://modrinth.com/project/easy-bluemap-sign-markers)
+You can download the plugin on [GitHub](https://github.com/MayLAN-Craft/maylan-markers/releases)
