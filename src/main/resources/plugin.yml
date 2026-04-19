@@ -1,8 +1,8 @@
-name: EasyBMSignMarkers
+name: MaylanMarkers
 version: ${version}
 main: dev.deimoslabs.easysignmarkers.SignMarkers
-api-version: 1.20.1
+api-version: '26.1.2'
 folia-supported: true
-authors: [deimiczny]
+authors: [kugge, deimiczny, jeffors, maylan-craft]
 depend: [BlueMap]
 description: Easily add markers to BlueMap with in-game signs

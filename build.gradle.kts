@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.deimoslabs"
-version = "0.9.4"
+version = "0.10.0"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(25))
