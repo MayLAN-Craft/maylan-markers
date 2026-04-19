@@ -36,6 +36,7 @@ public enum MarkerIcon {
     door,
     down,
     drink,
+    end,
     exclamation,
     factory,
     fire,
