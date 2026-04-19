@@ -1,13 +1,13 @@
 plugins {
     `java-library`
-    id("com.github.johnrengelman.shadow") version "8.0.0"
+    id("com.gradleup.shadow") version "9.4.1"
 }
 
 group = "dev.deimoslabs"
 version = "0.9.4"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
 repositories {
@@ -15,18 +15,17 @@ repositories {
     mavenCentral()
     maven("https://jitpack.io")
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven ( "https://repo.bluecolored.de/releases" )
 }
 
 dependencies {
-    implementation("net.kyori:adventure-text-minimessage:4.26.1")
-    implementation("net.kyori:adventure-text-serializer-legacy:4.26.1")
-    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
-    compileOnly("com.github.BlueMap-Minecraft:BlueMapAPI:v2.4.0")
+    compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
+    compileOnly("de.bluecolored:bluemap-api:2.7.8")
 }
 
 tasks.compileJava {
     options.encoding = Charsets.UTF_8.name()
-    options.release.set(17)
+    options.release.set(25)
 }
 
 tasks.processResources {
