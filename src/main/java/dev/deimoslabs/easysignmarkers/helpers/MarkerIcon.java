@@ -89,6 +89,7 @@ public enum MarkerIcon {
     world,
     wrench,
     yellowflag,
+    pin,
     papaj;
 
     /**
