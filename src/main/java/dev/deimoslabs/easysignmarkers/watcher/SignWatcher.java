@@ -8,8 +8,10 @@ import de.bluecolored.bluemap.api.markers.MarkerSet;
 import de.bluecolored.bluemap.api.markers.POIMarker;
 import dev.deimoslabs.easysignmarkers.FeatureProvider;
 import dev.deimoslabs.easysignmarkers.helpers.MarkerIcon;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -44,6 +46,10 @@ public class SignWatcher implements Listener {
      */
     private final FeatureProvider featureProvider;
 
+    // Adventure Component → plain String serializer (without color codes).
+    // Used to read the text content of sign lines.
+    private static final PlainTextComponentSerializer PLAIN = PlainTextComponentSerializer.plainText();
+
     /**
      * Constructs a SignWatcher using the provided FeatureProvider to access plugin features.
      *
@@ -73,8 +79,11 @@ public class SignWatcher implements Listener {
         MarkerIcon markerIcon;
 
         // ### Mapping sign's line 0 to specific marker type (translates to icon)
-        final String line0 = event.getLine(0);
-        if (line0 != null && !line0.isBlank() && line0.startsWith("[") && line0.endsWith("]")) {
+        // line(int) returns a Component; we serialize it to plain text for tag parsing.
+        final Component line0Component = event.line(0);
+        final String line0 = line0Component != null ? PLAIN.serialize(line0Component) : "";
+
+        if (!line0.isBlank() && line0.startsWith("[") && line0.endsWith("]")) {
             markerIcon = MarkerIcon.match(line0);
             iconLabel = markerIcon.name();
         } else {
@@ -100,11 +109,12 @@ public class SignWatcher implements Listener {
 
 
         // ### Building label for the sign, from lines 1-3
-        String label1 = event.getLine(1);
-        String label2 = event.getLine(2);
-        String label3 = event.getLine(3);
+        // Each line is a Component; null-safely converted to a plain String.
+        final String label1 = serializeLine(event.line(1));
+        final String label2 = serializeLine(event.line(2));
+        final String label3 = serializeLine(event.line(3));
 
-        String fullLabel = label1 + " " + label2 + " " + label3;
+        String fullLabel = (label1 + " " + label2 + " " + label3).trim();
 
         // ### No description - no marker
         if (fullLabel.isBlank()) return;
@@ -125,8 +135,8 @@ public class SignWatcher implements Listener {
         POIMarker marker = POIMarker.builder().position(pos).label(fullLabel).icon(icon, anchor).maxDistance(100000).detail(markerDetails).build();
         featureProvider.getMarkerSet().get(block.getWorld()).put(id, marker);
 
-        // ### Replace first line, with prefix, e.g. [map], to <marker> indicator
-        event.setLine(0, MARKER_PLACEHOLDER);
+        // ### Replace first line with marker indicator via new line(int, Component) setter
+        event.line(0, Component.text(MARKER_PLACEHOLDER));
         event.getPlayer().sendMessage(formatMessage(String.format(ADDED_TEMPLATE, markerIcon.name(), pos.getFloorX(), pos.getFloorY(), pos.getFloorZ())));
     }
 
@@ -154,6 +164,17 @@ public class SignWatcher implements Listener {
         set.remove(id);
 
         event.getPlayer().sendMessage(formatMessage(String.format(REMOVED_TEMPLATE, (int) pos.getX(), (int) pos.getY(), (int) pos.getZ())));
+    }
+
+    /**
+     * Null-safe serialization of an Adventure {@link Component} to a plain String.
+     * If the component is null (empty sign line), an empty string is returned.
+     *
+     * @param component the sign line as a Component, may be null
+     * @return plain-text representation of the line
+     */
+    private String serializeLine(Component component) {
+        return component != null ? PLAIN.serialize(component) : "";
     }
 
     /**
